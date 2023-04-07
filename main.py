@@ -24,7 +24,7 @@ class SpeedCalculator(QWidget):
 
         # Calculate button
         self.button = QPushButton("Calculate")
-        self.button.clicked.connect(self.calculate())
+        self.button.clicked.connect(self.calculate)
 
         # Output for the result
         self.output_label = QLabel("")
@@ -45,11 +45,19 @@ class SpeedCalculator(QWidget):
         # Gets the current
         check = self.expandable.currentText()
 
+        # Transforms the distance and the time into text for calculation
+        distance = self.distance_line_edit.text()
+        time = self.time_line_edit.text()
+
         # Checks if the selection is in km or mile and makes the calculation
         if "km" in check:
-            print(check)
+            km = float(distance) / float(time)
+            km = round(km, 2)
+            self.output_label.setText(f"Average Speed: {km}km")
         elif "mile" in check:
-            print(check)
+            mile = (float(distance) * 0.621371) / float(time)
+            mile = round(mile, 2)
+            self.output_label.setText(f"Average Speed: {mile}mph")
 
 
 # Constructs the application and displays it
